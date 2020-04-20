@@ -1,6 +1,6 @@
-package SchulungArbeit.swift;
+package SchulungArbeit.swift.LinieMitMausZeichnen;
+
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 public class Zeichnung extends JFrame

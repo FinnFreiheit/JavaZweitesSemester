@@ -1,4 +1,4 @@
-package SchulungArbeit.swift;
+package SchulungArbeit.swift.ErsteFrames;
 import java.awt.*;
 public class FrameOhneInhaltAWT
 {
