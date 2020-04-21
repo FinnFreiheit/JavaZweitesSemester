@@ -1,4 +1,4 @@
-package SchulungArbeit.swift.LinieMitMausZeichnen.finn.gui1;
+package SchulungArbeit.swing.LinieMitMausZeichnen;
 
 import java.awt.Point;
 

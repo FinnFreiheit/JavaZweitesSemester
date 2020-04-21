@@ -1,4 +1,4 @@
-package SchulungArbeit.swift.ErsteFrames;
+package SchulungArbeit.swing.ErsteFrames;
 
 import javax.swing.*;
 import java.awt.*;

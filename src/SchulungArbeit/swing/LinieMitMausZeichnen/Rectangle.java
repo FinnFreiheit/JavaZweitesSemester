@@ -1,6 +1,4 @@
-package SchulungArbeit.swift.LinieMitMausZeichnen.finn.gui1;
-
-import java.awt.*;
+package SchulungArbeit.swing.LinieMitMausZeichnen;
 
 public class Rectangle
 {
