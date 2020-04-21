@@ -1,5 +1,4 @@
 package SchulungArbeit.swing.LinieMitMausZeichnen;
-
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -77,10 +76,11 @@ public class MyWindow extends JFrame implements ActionListener
 
 	class Canvas extends JPanel implements MouseListener
 	{
-		Line curLine;
-		List<Line> allLines;
 
+		Line curLine;
 		Rectangle curRect;
+		//ArrayListen
+		List<Line> allLines;
 		List<Rectangle> allRect;
 
 		Canvas() //Konstruktor
@@ -104,13 +104,6 @@ public class MyWindow extends JFrame implements ActionListener
 			{
 				g.drawRect(r.x,r.y,r.width,r.hight);
 			}
-		}
-
-		@Override
-		public void mouseClicked(MouseEvent e)
-		{
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
@@ -196,6 +189,11 @@ public class MyWindow extends JFrame implements ActionListener
 		}
 		@Override
 		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+		@Override
+		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
 
 		}
