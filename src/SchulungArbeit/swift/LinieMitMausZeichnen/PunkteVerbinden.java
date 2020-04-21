@@ -12,13 +12,13 @@ public class PunkteVerbinden extends JFrame
     JPanel jp1,jp2;
     JToggleButton[] b = new JToggleButton[3];
 
-    public PunkteVerbinden()
+    public PunkteVerbinden() //Konstruktor
     {
         this.c = getContentPane();
-
         this.jp2 = new JPanel();
         this.z = new Zeichenbrett(this.b);
-        //jp1.add(z);
+        this.jp1 =  this.z;
+
         String[] text = {"Linie","Dreieck","Rechteck"};
         for (int i = 0; i < 3; i++)
         {
@@ -33,7 +33,7 @@ public class PunkteVerbinden extends JFrame
         this.b[1].addActionListener(bL);
         this.b[2].addActionListener(bL);
 
-        this.jp1 =  this.z;
+
         this.c.add(jp1,BorderLayout.CENTER);
         this.c.add(jp2,BorderLayout.SOUTH);
     }
@@ -63,6 +63,7 @@ public class PunkteVerbinden extends JFrame
          }
      }
     }
+
     public static void main(String[] args)
     {
         PunkteVerbinden fenster = new PunkteVerbinden();

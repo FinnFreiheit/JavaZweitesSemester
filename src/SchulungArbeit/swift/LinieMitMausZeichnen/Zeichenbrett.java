@@ -1,73 +1,80 @@
 package SchulungArbeit.swift.LinieMitMausZeichnen;
 
+import javax.sound.sampled.Line;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class Zeichenbrett extends JPanel
 {
-    private int[] x,y; //Koordinaten des Maus-Klicks
-    private int n;      // Anzahl der Klicks
+    Point p1 = new Point();
+    Point p2 = new Point();
+    Point p3 = new Point();
     private JToggleButton[] tButArray;
+    private int nrOfPoints;
 
-    public Zeichenbrett(JToggleButton[] tButArray)
+    ArrayList<Linie> ALLinie = new ArrayList<>();
+    ArrayList<Point> ALRechteck = new ArrayList<>();
+    ArrayList<Point> ALDreieck = new ArrayList<>();
+
+    public Zeichenbrett(JToggleButton[] tButArray)//Konstruktor
     {
         this.tButArray = tButArray;
-        this.n = 0;
-        this.x = new int[3];
-        this.y = new int[3];
+        this.nrOfPoints = 0;
         this.addMouseListener(new ClickBearbeiter());
+
     }
+
 
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        if(this.tButArray[0].isSelected())
-        {
-            System.out.println("Linie Zeichnen");
-            if(this.n==2)
-            {
-                g.drawLine(x[0],y[0],x[1],y[1]);
-                this.n = 0;
-            }
-        }
-        else if(this.tButArray[1].isSelected())
-        {
-            System.out.println("Dreieck Zeichnen");
-            if(this.n == 3)
-            {
-                g.drawPolygon(x,y,n);
-                this.n = 0;
-            }
 
-        }
-        else if(this.tButArray[2].isSelected())
-        {
-            System.out.println("Rechteck");
-            if(this.n==2)
-            {
-                g.drawRect(x[0],y[0],x[1]-x[0],y[1]-y[0]);
-                this.n = 0;
-            }
-        }
-        //g.drawPolyline(x,y,n);
     }
+
+
 
     class ClickBearbeiter extends MouseAdapter
     {
-        public void mousePressed(MouseEvent e)
+        private JToggleButton[] tButArray;
+
+
+        public void mousePressed(MouseEvent e,JToggleButton[] tButArray)
         {
 
-
-
-            x[n] = e.getX();
-            y[n] = e.getY();
-            n++;
+            this.tButArray = tButArray;
+            p1.x = e.getX();
+            p1.y = e.getY();
+            nrOfPoints++;
             Zeichenbrett.this.repaint();
-            //repaint();
-            //getGraphics().drawPolygon(x,y,n);
 
+            System.out.println("Klicks : " + nrOfPoints);
+
+            if (this.tButArray[0].isSelected())
+            {
+                System.out.println("Linie ausgewählt");
+                Linie l = new Linie(p1,p1);
+                if (nrOfPoints == 2)
+                {
+                    System.out.println("Zweiter Klick");
+                }
+
+
+            }
+            else if (this.tButArray[1].isSelected())
+            {
+                System.out.println("Dreieck ausgewählt");
+
+            }
+            else if(this.tButArray[2].isSelected())
+            {
+                System.out.println("Rechteck ausgewählt");
+
+            }
         }
     }
 }
