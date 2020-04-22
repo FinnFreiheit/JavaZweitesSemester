@@ -1,14 +1,16 @@
 package SchulungArbeit.swing.LinieMitMausZeichnen;
 
-import java.awt.Point;
+import java.awt.*;
 
 public class Line
 {
 	Point start;
 	Point end;
+	Color farbe;
 	
-	public Line(Point start, Point end)
+	public Line(Point start, Point end, Color farbe)
 	{
+		this.farbe = farbe;
 		this.start = start;
 		this.end = end;
 	}
@@ -21,6 +23,11 @@ public class Line
 	public void setEnd(Point end)
 	{
 		this.end = end;
+	}
+
+	public void setFarbe(Color farbe)
+	{
+		this.farbe = farbe;
 	}
 	
 	

@@ -15,7 +15,10 @@ public class MyWindow extends JFrame implements ActionListener
 
 	JMenuBar menuBar;
 	JMenu menu;
-	JMenuItem menuItem;
+	JCheckBoxMenuItem btnRed;
+	JCheckBoxMenuItem btnBlack;
+
+
 
 	public MyWindow()
 	{
@@ -27,17 +30,22 @@ public class MyWindow extends JFrame implements ActionListener
 		this.getContentPane().add(this.canvas, BorderLayout.CENTER);
 		this.getContentPane().add(createButtonPanel(), BorderLayout.SOUTH);
 
+		this.menuBar = new JMenuBar();
+		this.menu = new JMenu("Farbe");
+		this.menu.setMnemonic(KeyEvent.VK_1);
+
+		btnRed = new JCheckBoxMenuItem("RED");
+		this.btnRed.addActionListener(this);
+		menu.add(btnRed);
+
+		btnBlack = new JCheckBoxMenuItem("Black");
+		this.btnBlack.addActionListener(this);
+		menu.add(btnBlack);
 
 
-		menuBar = new JMenuBar();
-		menu = new JMenu("Text1");
-		menu.setMnemonic(KeyEvent.VK_1);
-		menuItem = new JMenuItem("Text2");
-		menuItem.setMnemonic(java.awt.event.KeyEvent.VK_2);
-		menu.add(menuItem);
 
-		menuBar.add(menu);
-		setJMenuBar(menuBar);
+		this.menuBar.add(menu);
+		this.setJMenuBar(menuBar);
 
 		this.setVisible(true);
 
@@ -105,6 +113,17 @@ public class MyWindow extends JFrame implements ActionListener
 			this.canvas.allDrei.clear();
 			this.canvas.repaint();
 		}
+		//Farbe
+		if (e.getSource() == btnBlack)
+		{
+			System.out.println("btnBlack");
+			btnRed.setSelected(false);
+		}
+		else if(e.getSource() == btnRed)
+		{
+			btnBlack.setSelected(false);
+
+		}
 
 	}
 
@@ -137,6 +156,7 @@ public class MyWindow extends JFrame implements ActionListener
 
 			for(Line l : this.allLines)
 			{
+				g.setColor(l.farbe);
 				g.drawLine(l.start.x, l.start.y, l.end.x, l.end.y);
 			}
 
@@ -155,21 +175,36 @@ public class MyWindow extends JFrame implements ActionListener
 		@Override
 		public void mousePressed(MouseEvent e)
 		{
+
 			//Linie
 			if(MyWindow.this.tBtnArr[0].isSelected())
 			{
 				Point here = e.getPoint();
 				if (this.curLine == null)
 				{
-					this.curLine = new Line(here, here);
+					this.curLine = new Line(here, here,Color.BLACK);
 				}
 				else
 				{
 					this.curLine.setEnd(here);
+
+					//Farbe
+					if(MyWindow.this.btnRed.isSelected())
+					{
+						this.curLine.setFarbe(Color.RED);
+					}
+					else if(MyWindow.this.btnBlack.isSelected())
+					{
+						this.curLine.setFarbe(Color.BLACK);
+					}
+
+
 					this.allLines.add(this.curLine);
 					this.curLine = null;
 					this.repaint();
 				}
+
+
 				System.out.println("pressed");
 			}
 
