@@ -1,11 +1,6 @@
 package SchulungArbeit.swing.LinieMitMausZeichnen;
-import java.awt.BorderLayout;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,22 +12,43 @@ public class MyWindow extends JFrame implements ActionListener
 	JToggleButton[] tBtnArr;
 	Canvas canvas;
 
+	JMenuBar menuBar;
+	JMenu menu;
+	JMenuItem menuItem;
+
 	public MyWindow()
 	{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(400, 400);
 		this.setTitle("Finn Freiheit");
 		this.canvas = new Canvas();
+
 		this.getContentPane().add(this.canvas, BorderLayout.CENTER);
 		this.getContentPane().add(createButtonPanel(), BorderLayout.SOUTH);
+
+
+
+		menuBar = new JMenuBar();
+		menu = new JMenu("Text1");
+		menu.setMnemonic(KeyEvent.VK_1);
+		menuItem = new JMenuItem("Text2");
+		menuItem.setMnemonic(java.awt.event.KeyEvent.VK_2);
+		menu.add(menuItem);
+
+		menuBar.add(menu);
+		setJMenuBar(menuBar);
+
 		this.setVisible(true);
+
+
+
 	}
 
 	private JPanel createButtonPanel()
 	{
 		JPanel panel = new JPanel();
 
-		this.tBtnArr = new JToggleButton[3];
+		this.tBtnArr = new JToggleButton[4];
 
 		this.tBtnArr[0] = new JToggleButton("Line");
 		this.tBtnArr[0].addActionListener(this);
@@ -45,6 +61,10 @@ public class MyWindow extends JFrame implements ActionListener
 		this.tBtnArr[2] = new JToggleButton("Dreieck");
 		this.tBtnArr[2].addActionListener(this);
 		panel.add(this.tBtnArr[2]);
+
+		this.tBtnArr[3] = new JToggleButton("Clear");
+		this.tBtnArr[3].addActionListener(this);
+		panel.add(this.tBtnArr[3]);
 
 		return panel;
 	}
@@ -65,11 +85,19 @@ public class MyWindow extends JFrame implements ActionListener
 			tBtnArr[0].setSelected(false);
 			tBtnArr[2].setSelected(false);
 		}
-		else
+		else if (e.getSource() == tBtnArr[2])
 		{
 			System.out.println("Dreieck gedrückt");
 			tBtnArr[1].setSelected(false);
 			tBtnArr[0].setSelected(false);
+		}
+		else if (e.getSource() == tBtnArr[3])
+		{
+			System.out.println("Clear gedrückt");
+			this.canvas.allLines.clear();
+			this.canvas.allRect.clear();
+			this.canvas.allDrei.clear();
+			this.canvas.repaint();
 		}
 
 	}
@@ -79,15 +107,21 @@ public class MyWindow extends JFrame implements ActionListener
 
 		Line curLine;
 		Rectangle curRect;
+		Dreieck curDrei;
 		//ArrayListen
 		List<Line> allLines;
 		List<Rectangle> allRect;
+		List<Dreieck>allDrei;
+
+		boolean boolP1 = false;
+		boolean boolP2 = false;
 
 		Canvas() //Konstruktor
 		{
 			this.addMouseListener(this);
 			this.allLines = new ArrayList<>();
 			this.allRect = new ArrayList<>();
+			this.allDrei = new ArrayList<>();
 		}
 
 		@Override
@@ -103,6 +137,12 @@ public class MyWindow extends JFrame implements ActionListener
 			for(Rectangle r : this.allRect)
 			{
 				g.drawRect(r.x,r.y,r.width,r.hight);
+			}
+			for(Dreieck d : this.allDrei)
+			{
+				g.drawLine(d.p1.x,d.p1.y,d.p2.x,d.p2.y);
+				g.drawLine(d.p2.x,d.p2.y,d.p3.x,d.p3.y);
+				g.drawLine(d.p3.x,d.p3.y,d.p1.x,d.p1.y);
 			}
 		}
 
@@ -174,6 +214,33 @@ public class MyWindow extends JFrame implements ActionListener
 					this.curRect = null;
 					this.repaint();
 				}
+			}
+
+			//Dreieck
+			if(MyWindow.this.tBtnArr[2].isSelected())
+			{
+
+				Point here = e.getPoint();
+				if(!boolP1)
+				{
+					this.curDrei = new Dreieck(here,here,here);
+					boolP1 = true;
+				}
+				else if(!boolP2)
+				{
+					this.curDrei.setP2(here);
+					boolP2 = true;
+				}
+				else
+				{
+					this.curDrei.setP3(here);
+					this.allDrei.add(this.curDrei);
+					boolP1 = false;
+					boolP2 = false;
+					this.repaint();
+				}
+
+
 			}
 		}
 
