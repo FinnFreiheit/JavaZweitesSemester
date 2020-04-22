@@ -11,6 +11,7 @@ public class MyWindow extends JFrame implements ActionListener
 {
 	JToggleButton[] tBtnArr;
 	Canvas canvas;
+	JButton clear;
 
 	JMenuBar menuBar;
 	JMenu menu;
@@ -50,6 +51,7 @@ public class MyWindow extends JFrame implements ActionListener
 
 		this.tBtnArr = new JToggleButton[4];
 
+
 		this.tBtnArr[0] = new JToggleButton("Line");
 		this.tBtnArr[0].addActionListener(this);
 		panel.add(this.tBtnArr[0]);
@@ -62,9 +64,13 @@ public class MyWindow extends JFrame implements ActionListener
 		this.tBtnArr[2].addActionListener(this);
 		panel.add(this.tBtnArr[2]);
 
-		this.tBtnArr[3] = new JToggleButton("Clear");
+		/*this.tBtnArr[3] = new JToggleButton("Clear");
 		this.tBtnArr[3].addActionListener(this);
-		panel.add(this.tBtnArr[3]);
+		panel.add(this.tBtnArr[3]);*/
+
+		this.clear = new JButton("Clear");
+		this.clear.addActionListener(this);
+		panel.add(this.clear);
 
 		return panel;
 	}
@@ -91,7 +97,7 @@ public class MyWindow extends JFrame implements ActionListener
 			tBtnArr[1].setSelected(false);
 			tBtnArr[0].setSelected(false);
 		}
-		else if (e.getSource() == tBtnArr[3])
+		else if (e.getSource() == clear)
 		{
 			System.out.println("Clear gedrückt");
 			this.canvas.allLines.clear();
