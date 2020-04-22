@@ -29,7 +29,7 @@ public class Line
 	{
 		this.farbe = farbe;
 	}
-	
-	
-	
+
+
+
 }
