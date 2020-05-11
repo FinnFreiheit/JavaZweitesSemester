@@ -1,4 +1,4 @@
-package dhbw.Termin01.Aufgabe02;
+package dhbw.Termin01.Aufgabe2;
 
 /**
  * Programm zur Berechnung des Kleinen 1 x 1
