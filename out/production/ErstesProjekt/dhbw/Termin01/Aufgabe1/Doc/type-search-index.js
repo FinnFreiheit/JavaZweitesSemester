@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"dhbw.Termin01.Aufgabe1","l":"Aufgabe01"},{"p":"dhbw.Termin01.Aufgabe1","l":"Kreisberechnung"}]
