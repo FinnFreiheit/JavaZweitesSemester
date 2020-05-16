@@ -68,4 +68,12 @@ public class Eingabe
         }while(!eingabeKorrekt);
         return eingabe;
     }
+
+    public static String delStringSatzZeichen(String eingabe)
+    {
+        eingabe = eingabe.replace(" ","");
+        eingabe = eingabe.replace(",","");
+        eingabe = eingabe.replace(".","");
+        return eingabe;
+    }
 }
