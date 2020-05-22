@@ -1,6 +1,5 @@
 package dhbw.Termin03.Aufgabe02;
 
-import JavaBuch.Studenten.Student;
 import dhbw.Termin03.Aufgabe01.Studenten;
 
 public class StudentenListe
@@ -8,11 +7,18 @@ public class StudentenListe
     int maximalwert;
     private Studenten[] stListVorher;
 
+    /**
+     * Construktor
+     */
     StudentenListe()
     {
         this.stListVorher = new Studenten[0];
     }
 
+    /**
+     * Fügt ein Student zur Liste hinzu
+     * @param s Student Objekt
+     */
     void add(Studenten s)
     {
         Studenten[] stListNachher;
@@ -38,6 +44,9 @@ public class StudentenListe
         this.stListVorher = stListNachher;
     }
 
+    /**
+     * Ausgabe der Studentenliste
+     */
     void ausgabe()
     {
         for(Studenten s : this.stListVorher)
@@ -47,6 +56,74 @@ public class StudentenListe
         }
     }
 
+    /**
+     * Suche Nachname in Liste
+     * @param nachname String
+     * @return Student
+     */
+    Studenten sucheNachnamen(String nachname)
+    {
+     for (Studenten i : this.stListVorher)
+     {
+         if (i.getNachname().equals(nachname))
+         {
+             return i;
+         }
+     }return null;
+    }
+
+    /**
+     * Suche Vorname aus Liste
+     * @param vorname String
+     * @return Student
+     */
+    Studenten sucheVornamen(String vorname)
+    {
+        for(Studenten i : this.stListVorher)
+        {
+            if(i.getVorname().equals(vorname))
+            {
+                return i;
+            }
+        }return null;
+    }
+
+    /**
+     * Suche Matrickelnummer in Liste
+     * @param matrikelnummer int
+     * @return Student
+     */
+    Studenten sucheMatrikelnummer(int matrikelnummer)
+    {
+        for(Studenten i : this.stListVorher)
+        {
+            if(i.getMatrikelnummer() == matrikelnummer)
+            {
+                return i;
+            }
+        }return null;
+    }
+
+    /**
+     * Suchen Ort in Liste
+     * @param ort Sting
+     * @return Student
+     */
+    Studenten sucheOrt(String ort)
+    {
+        for(Studenten i : this.stListVorher)
+        {
+            if(i.getAnschrift().getOrt().equals(ort));
+            {
+                return i;
+            }
+        }return null;
+    }
+
+    /**
+     * Löscht Student aus der Liste
+     * @param s Student Objekt
+     */
     void loeschen(Studenten s)
     {
         StudentenListe sListe = new StudentenListe();
