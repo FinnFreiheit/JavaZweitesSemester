@@ -34,19 +34,19 @@ public class Test
 
         //erster Student Immatrikulieren
         System.out.println("Ersten Student Immatrikulieren");
-        studentA.immatrikulieren(12345678);
+        studentA.immatrikulieren("123456789");
         System.out.println(studentA.toString());
         System.out.println("_______________________________________");
 
         //zweiten Student Immatrikulieren
         System.out.println("zweiten Student Immatrikulieren");
-        studentB.immatrikulieren(87654321);
+        studentB.immatrikulieren("987654321");
         System.out.println(studentB.toString());
         System.out.println("_______________________________________");
 
         //dritten Student Immatrikulieren
         System.out.println("dritten Student Immatrikulieren");
-        studentC.immatrikulieren(56781234);
+        studentC.immatrikulieren("567891234");
         System.out.println(studentC.toString());
         System.out.println("_______________________________________");
 

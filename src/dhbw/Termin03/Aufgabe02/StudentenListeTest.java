@@ -2,8 +2,6 @@ package dhbw.Termin03.Aufgabe02;
 
 import dhbw.Termin03.Aufgabe01.*;
 
-import java.sql.SQLOutput;
-
 public class StudentenListeTest
 {
 
@@ -12,7 +10,7 @@ public class StudentenListeTest
     public static void main(String[] args)
     {
         StudentenListe liste = new StudentenListe();
-
+        liste.maximalwert = 3;
         //erster Student
         Studenten studentA = new Studenten
                 ("Finn","Freiheit","Simplonstraße","10245","Berlin");
@@ -36,8 +34,18 @@ public class StudentenListeTest
         liste.ausgabe();
         System.out.println("*************************************************************");
 
-        System.out.println("Suche Nachname ");
+        System.out.println("Suche Nachname (Freiheit) ");
         System.out.println(liste.sucheNachnamen("Freiheit"));
+        System.out.println("*************************************************************");
+
+        System.out.println("Suche Matrikelnummer");
+        System.out.println(liste.sucheMatrikelnummer("123456789").toString());
+
+        System.out.println("Ersten, Zweiten, Dritten Student Ematrikulieren");
+        liste.getStdListe()[0].immatrikulieren("123456789");
+        liste.getStdListe()[1].immatrikulieren("987654321");
+        liste.getStdListe()[2].immatrikulieren("678912345");
+        liste.ausgabe();
         System.out.println("*************************************************************");
 
         System.out.println("Löschen Erster Student");

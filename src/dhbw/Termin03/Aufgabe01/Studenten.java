@@ -11,7 +11,7 @@ public class Studenten
 {
     private String vorname;
     private String nachname;
-    private int matrikelnummer;
+    private String matrikelnummer;
     private Anschrift anschrift;
 
     private LocalDate immatrikulationsdatum;
@@ -50,10 +50,10 @@ public class Studenten
      * @param matrikelnummer
      * @return boolean
      */
-    public boolean immatrikulieren(int matrikelnummer)
+    public boolean immatrikulieren(String matrikelnummer)
     {
         this.immatrikulationsdatum = LocalDate.now();
-        if(matrikelnummer < 1000000000)
+        if(matrikelnummer.length() == 9)
         {
             this.matrikelnummer = matrikelnummer;
             return true;
@@ -141,7 +141,7 @@ public class Studenten
      * Get Matrikelnummer
      * @return Matrikelnummer Student
      */
-    public int getMatrikelnummer()
+    public String getMatrikelnummer()
     {
         return matrikelnummer;
     }

@@ -2,17 +2,22 @@ package dhbw.Termin03.Aufgabe02;
 
 import dhbw.Termin03.Aufgabe01.Studenten;
 
+import java.util.Objects;
+
 public class StudentenListe
 {
     int maximalwert;
-    private Studenten[] stListVorher;
+    int zaehler = 0;
+    private Studenten[] stdListe;
+
+    private Studenten studentNotFound = new Studenten("Not Found", null, null, null,null);
 
     /**
      * Construktor
      */
     StudentenListe()
     {
-        this.stListVorher = new Studenten[0];
+        this.stdListe = new Studenten[0];
     }
 
     /**
@@ -21,27 +26,31 @@ public class StudentenListe
      */
     void add(Studenten s)
     {
-        Studenten[] stListNachher;
-        boolean temp = true;
-        //Auf Doppelung prüfen
-        for (Studenten i : this.stListVorher)
+        if (zaehler < maximalwert)
         {
-            temp = (s != i);
+            Studenten[] stListNachher;
+            boolean temp = true;
+            //Auf Doppelung prüfen
+            for (Studenten i : this.stdListe)
+            {
+                temp = (s != i);
+            }
+            if (this.stdListe.length != 0 && temp)
+            {
+                //Neues Feld (eins größer als alte Feld)
+                stListNachher = new Studenten[stdListe.length + 1];
+                //Coppy Feld
+                System.arraycopy(this.stdListe, 0, stListNachher, 0, this.stdListe.length);
+                stListNachher[stdListe.length] = s;
+            }else
+            {
+                 stListNachher = new Studenten[1];
+                stListNachher[0] = s;
+            }
+            //Referenz auf neue Liste
+            this.stdListe = stListNachher;
         }
-        if (this.stListVorher.length != 0 && temp)
-        {
-            //Neues Feld (eins größer als alte Feld)
-            stListNachher = new Studenten[stListVorher.length + 1];
-            //Coppy Feld
-            System.arraycopy(this.stListVorher, 0, stListNachher, 0, this.stListVorher.length);
-            stListNachher[stListVorher.length] = s;
-        }else
-        {
-             stListNachher = new Studenten[1];
-            stListNachher[0] = s;
-        }
-        //Referenz auf neue Liste
-        this.stListVorher = stListNachher;
+        this.zaehler++;
     }
 
     /**
@@ -49,7 +58,7 @@ public class StudentenListe
      */
     void ausgabe()
     {
-        for(Studenten s : this.stListVorher)
+        for(Studenten s : this.stdListe)
         {
             System.out.println(s.toString());
             System.out.println("___________________________");
@@ -63,13 +72,13 @@ public class StudentenListe
      */
     Studenten sucheNachnamen(String nachname)
     {
-     for (Studenten i : this.stListVorher)
+     for (Studenten i : this.stdListe)
      {
          if (i.getNachname().equals(nachname))
          {
              return i;
          }
-     }return null;
+     }return studentNotFound;
     }
 
     /**
@@ -79,13 +88,13 @@ public class StudentenListe
      */
     Studenten sucheVornamen(String vorname)
     {
-        for(Studenten i : this.stListVorher)
+        for(Studenten i : this.stdListe)
         {
             if(i.getVorname().equals(vorname))
             {
                 return i;
             }
-        }return null;
+        }return studentNotFound;
     }
 
     /**
@@ -93,15 +102,15 @@ public class StudentenListe
      * @param matrikelnummer int
      * @return Student
      */
-    Studenten sucheMatrikelnummer(int matrikelnummer)
+    Studenten sucheMatrikelnummer(String matrikelnummer)
     {
-        for(Studenten i : this.stListVorher)
+        for(Studenten i : this.stdListe)
         {
-            if(i.getMatrikelnummer() == matrikelnummer)
+            if(Objects.equals(i.getMatrikelnummer(), matrikelnummer))
             {
                 return i;
             }
-        }return null;
+        }return studentNotFound;
     }
 
     /**
@@ -111,13 +120,22 @@ public class StudentenListe
      */
     Studenten sucheOrt(String ort)
     {
-        for(Studenten i : this.stListVorher)
+        for(Studenten i : this.stdListe)
         {
-            if(i.getAnschrift().getOrt().equals(ort));
+            if(i.getAnschrift().getOrt().equals(ort))
             {
                 return i;
             }
-        }return null;
+        }return studentNotFound;
+    }
+
+    boolean sucheObVorhanden(String suchObj)
+    {
+        if(sucheOrt(suchObj) != studentNotFound) return false;
+        if(sucheVornamen(suchObj) != studentNotFound) return false;
+        if(sucheNachnamen(suchObj) != studentNotFound) return false;
+        if(sucheMatrikelnummer(suchObj) != studentNotFound) return false;
+        else return true;
     }
 
     /**
@@ -126,18 +144,26 @@ public class StudentenListe
      */
     void loeschen(Studenten s)
     {
+        Studenten zuloeschen;
+        if(sucheMatrikelnummer(s.getMatrikelnummer()) != studentNotFound)
+         zuloeschen = sucheMatrikelnummer(s.getMatrikelnummer());
+        else zuloeschen = sucheNachnamen(s.getNachname());
         StudentenListe sListe = new StudentenListe();
-        boolean temp = false;
-
-        for(Studenten i : this.stListVorher)
+        sListe.maximalwert = this.maximalwert;
+        for(Studenten i : this.stdListe)
         {
-            if(i != s)
+            if(i != zuloeschen)
             {
                 sListe.add(i);
             }
         }
 
-        this.stListVorher = sListe.stListVorher;
+        this.stdListe = sListe.stdListe;
     }
 
+
+    public Studenten[] getStdListe()
+    {
+        return stdListe;
+    }
 }
