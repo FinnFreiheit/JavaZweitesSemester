@@ -6,7 +6,11 @@ public class StudentenListeTest
 {
 
 
-
+    /**
+     * Mainmethode zum testen der Klasse StudentenListe.
+     * Beim anlegen einer StudentenListe muss die Maximale große der Liste angegeben werden.
+     * @param args
+     */
     public static void main(String[] args)
     {
         StudentenListe liste = new StudentenListe();
@@ -40,11 +44,12 @@ public class StudentenListeTest
 
         System.out.println("Suche Matrikelnummer");
         System.out.println(liste.sucheMatrikelnummer("123456789").toString());
+        System.out.println("*************************************************************");
 
         System.out.println("Ersten, Zweiten, Dritten Student Ematrikulieren");
         liste.getStdListe()[0].immatrikulieren("123456789");
         liste.getStdListe()[1].immatrikulieren("987654321");
-        liste.getStdListe()[2].immatrikulieren("678912345");
+        liste.getStd(3).immatrikulieren("678912345");
         liste.ausgabe();
         System.out.println("*************************************************************");
 

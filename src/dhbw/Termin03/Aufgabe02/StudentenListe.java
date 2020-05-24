@@ -10,7 +10,7 @@ public class StudentenListe
     int zaehler = 0;
     private Studenten[] stdListe;
 
-    private Studenten studentNotFound = new Studenten("Not Found", null, null, null,null);
+    private final static Studenten STUDENT_NOT_FOUND = new Studenten("Not Found", null, null, null,null);
 
     /**
      * Construktor
@@ -22,6 +22,7 @@ public class StudentenListe
 
     /**
      * Fügt ein Student zur Liste hinzu
+     * @pre Studentenliste noch nicht voll
      * @param s Student Objekt
      */
     void add(Studenten s)
@@ -78,7 +79,7 @@ public class StudentenListe
          {
              return i;
          }
-     }return studentNotFound;
+     }return STUDENT_NOT_FOUND;
     }
 
     /**
@@ -94,7 +95,7 @@ public class StudentenListe
             {
                 return i;
             }
-        }return studentNotFound;
+        }return STUDENT_NOT_FOUND;
     }
 
     /**
@@ -110,7 +111,7 @@ public class StudentenListe
             {
                 return i;
             }
-        }return studentNotFound;
+        }return STUDENT_NOT_FOUND;
     }
 
     /**
@@ -126,26 +127,27 @@ public class StudentenListe
             {
                 return i;
             }
-        }return studentNotFound;
+        }return STUDENT_NOT_FOUND;
     }
 
     boolean sucheObVorhanden(String suchObj)
     {
-        if(sucheOrt(suchObj) != studentNotFound) return false;
-        if(sucheVornamen(suchObj) != studentNotFound) return false;
-        if(sucheNachnamen(suchObj) != studentNotFound) return false;
-        if(sucheMatrikelnummer(suchObj) != studentNotFound) return false;
+        if(sucheOrt(suchObj) != STUDENT_NOT_FOUND) return false;
+        if(sucheVornamen(suchObj) != STUDENT_NOT_FOUND) return false;
+        if(sucheNachnamen(suchObj) != STUDENT_NOT_FOUND) return false;
+        if(sucheMatrikelnummer(suchObj) != STUDENT_NOT_FOUND) return false;
         else return true;
     }
 
     /**
      * Löscht Student aus der Liste
      * @param s Student Objekt
+     * @pre Student vorhanden
      */
     void loeschen(Studenten s)
     {
         Studenten zuloeschen;
-        if(sucheMatrikelnummer(s.getMatrikelnummer()) != studentNotFound)
+        if(sucheMatrikelnummer(s.getMatrikelnummer()) != STUDENT_NOT_FOUND)
          zuloeschen = sucheMatrikelnummer(s.getMatrikelnummer());
         else zuloeschen = sucheNachnamen(s.getNachname());
         StudentenListe sListe = new StudentenListe();
@@ -165,5 +167,14 @@ public class StudentenListe
     public Studenten[] getStdListe()
     {
         return stdListe;
+    }
+
+    public Studenten getStd(int index)
+    {
+        if(index>=0 && index<this.stdListe.length)
+        {
+            return this.stdListe[index];
+        }
+        else return STUDENT_NOT_FOUND;
     }
 }

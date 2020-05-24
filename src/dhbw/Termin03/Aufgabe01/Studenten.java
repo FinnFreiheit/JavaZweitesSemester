@@ -47,6 +47,7 @@ public class Studenten
 
     /**
      * Student Immatrikulieren
+     * @pre Matrikelnummer muss 9 Stellig sein
      * @param matrikelnummer
      * @return boolean
      */
@@ -64,6 +65,7 @@ public class Studenten
 
     /**
      * Student Exmatrikulieren
+     * @INV Exmatrikulation nur möglich wenn Student Imatrikuliert ist
      * @return boolean
      */
     public boolean exmatrikulieren()
@@ -90,33 +92,6 @@ public class Studenten
                 + anschrift.toString()
                 + ", immatrikulationsdatum=" + immatrikulationsdatum
                 + ", exmatrikulationsdatum=" + exmatrikulationsdatum + '}';
-    }
-
-    public static class Anschrift
-    {
-        private String strasse;
-        private String postleitzahl;
-        private String ort;
-
-        @Override
-        public String toString()
-        {
-            return ", strasse='" + strasse + '\''
-                    + ", postleitzahl='" + postleitzahl + '\''
-                    + ", ort='" + ort + '\'' ;
-        }
-
-        public Anschrift(String strasse, String postleitzahl, String ort)
-        {
-            this.strasse = strasse;
-            this.postleitzahl = postleitzahl;
-            this.ort = ort;
-        }
-
-        public String getOrt()
-        {
-            return ort;
-        }
     }
 
     /**
@@ -153,5 +128,49 @@ public class Studenten
     public Anschrift getAnschrift()
     {
         return anschrift;
+    }
+
+    /**
+     * Unterklasse von Studenten
+     */
+    public static class Anschrift
+    {
+        private String strasse;
+        private String postleitzahl;
+        private String ort;
+
+        /**
+         * Anschrift to String
+         * @return String
+         */
+        @Override
+        public String toString()
+        {
+            return ", strasse='" + strasse + '\''
+                    + ", postleitzahl='" + postleitzahl + '\''
+                    + ", ort='" + ort + '\'' ;
+        }
+
+        /**
+         * Construktor
+         * @param strasse String
+         * @param postleitzahl String
+         * @param ort String
+         */
+        public Anschrift(String strasse, String postleitzahl, String ort)
+        {
+            this.strasse = strasse;
+            this.postleitzahl = postleitzahl;
+            this.ort = ort;
+        }
+
+        /**
+         * Get Ort
+         * @return ort String
+         */
+        public String getOrt()
+        {
+            return ort;
+        }
     }
 }
