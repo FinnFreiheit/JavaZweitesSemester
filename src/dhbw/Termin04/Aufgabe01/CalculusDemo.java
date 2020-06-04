@@ -17,6 +17,7 @@ public class CalculusDemo
         int zahl1 = 5;
         int zahl2 = 4;
 
+
         Context addition = new Context(new OperationAdd());
         Context subtraktion = new Context(new OperationSubtract());
         Context multiplikation = new Context(new OperationMultiply());
