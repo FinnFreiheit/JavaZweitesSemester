@@ -69,17 +69,28 @@ public class StudentenListeTest {
 		}
 		
 		//Systemausgabe:
-		System.out.println();
+		System.out.println("________________________________________________");
+		System.out.println("unsortierte Liste");
 		liste.printListe();
 
 		System.out.println("________________________________________________");
-
-		System.out.println(liste.getStudent(0).toString());
-		System.out.println(liste.getStudent(1).toString());
-		System.out.println(liste.getStudent(0).compareTo(liste.getStudent(1)));
+		System.out.println("sortieren nach Matrikelnummer");
+		liste.sortStudent();
+		liste.printListe();
 
 		System.out.println("________________________________________________");
-		liste.sortStudent();
+		System.out.println("sortieren nach Vorname");
+		liste.sortStudentVorname();
+		liste.printListe();
+
+		System.out.println("________________________________________________");
+		System.out.println("sortieren nach Nachname");
+		liste.sortStudentNachname();
+		liste.printListe();
+
+		System.out.println("________________________________________________");
+		System.out.println("sortieren nach Ort");
+		liste.sortStudentOrt();
 		liste.printListe();
 
 

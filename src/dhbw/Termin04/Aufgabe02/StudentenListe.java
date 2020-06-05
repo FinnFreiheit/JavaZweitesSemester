@@ -131,6 +131,11 @@ public class StudentenListe
 		}
 	}
 
+	/**
+	 * Gibt den Studenten an der stelle vom übergebenen Index zurück
+	 * @param index Arrayposition
+	 * @return Student
+	 */
 	public Student getStudent(int index)
 	{
 		if(index >= 0 && index < this.getAnzahlStudenten()) {
@@ -141,6 +146,9 @@ public class StudentenListe
 		}
 	}
 
+	/**
+	 * Sortiert Studentenliste nach der Matrikelnummer aufsteigend.
+	 */
 	public void sortStudent()
 	{
 		Student temp;
@@ -149,6 +157,66 @@ public class StudentenListe
 			for(int j = 0; j < liste.length - i; j++ )
 			{
 				if((liste[j].compareTo(liste[j + 1])) > 0 )
+				{
+					temp = getStudent(j);
+					liste[j] = liste[j + 1];
+					liste[j+1] = temp;
+				}
+			}
+		}
+	}
+
+	/**
+	 * sortiert Studentenliste nach dem Vornamen
+	 */
+	public void sortStudentVorname()
+	{
+		Student temp;
+		for(int i = 1  ; i < liste.length; i++)
+		{
+			for(int j = 0; j < liste.length - i; j++ )
+			{
+				if((liste[j].getVorname().compareTo(liste[j + 1].getVorname())) > 0 )
+				{
+					temp = getStudent(j);
+					liste[j] = liste[j + 1];
+					liste[j+1] = temp;
+				}
+			}
+		}
+	}
+
+	/**
+	 * sortiert Studentenliste nach dem Nachnamen
+	 */
+	public void sortStudentNachname()
+	{
+		Student temp;
+		for(int i = 1  ; i < liste.length; i++)
+		{
+			for(int j = 0; j < liste.length - i; j++ )
+			{
+				if((liste[j].getNachname().compareTo(liste[j + 1].getNachname())) > 0 )
+				{
+					temp = getStudent(j);
+					liste[j] = liste[j + 1];
+					liste[j+1] = temp;
+				}
+			}
+		}
+	}
+
+	/**
+	 * sortiert Studentenliste nach dem Ort
+	 */
+	public void sortStudentOrt()
+	{
+		Student temp;
+		for(int i = 1  ; i < liste.length; i++)
+		{
+			for(int j = 0; j < liste.length - i; j++ )
+			{
+				if((liste[j].getOrt().compareTo(liste[j + 1].getOrt())) > 0 )
 				{
 					temp = getStudent(j);
 					liste[j] = liste[j + 1];
