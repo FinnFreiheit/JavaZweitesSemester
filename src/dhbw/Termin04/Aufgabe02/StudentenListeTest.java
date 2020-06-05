@@ -2,6 +2,8 @@ package dhbw.Termin04.Aufgabe02;
 
 import dhbw.Termin04.Aufgabe02.Student;
 
+import java.util.Random;
+
 /**
  * Diese Klasse testet die Klasse <code>StudentenListe</code>.
  */
@@ -11,7 +13,8 @@ public class StudentenListeTest {
 	 * testet die Implementierung von <code>StudentenListe</code>.
 	 * @param args keine Start-Parameter.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		
 		StudentenListe liste = new StudentenListe();
 		//für den Test der Liste fehlen nun Methoden, die für die eigentliche Funktion nicht erforderlich sind
@@ -68,6 +71,19 @@ public class StudentenListeTest {
 		//Systemausgabe:
 		System.out.println();
 		liste.printListe();
+
+		System.out.println("________________________________________________");
+
+		System.out.println(liste.getStudent(0).toString());
+		System.out.println(liste.getStudent(1).toString());
+		System.out.println(liste.getStudent(0).compareTo(liste.getStudent(1)));
+
+		System.out.println("________________________________________________");
+		liste.sortStudent();
+		liste.printListe();
+
+
+
 	}
 	
 	/**
@@ -88,10 +104,12 @@ public class StudentenListeTest {
 	 * @return 9-stellige Matrikelnummer.
 	 */
 	private static String formatMatrikelNummer(int nummer) {
+
+		Random r = new Random();
 		String matrikelnummer = "";
 		int length = String.valueOf(nummer).length();
 		for (int i = 0; i < 9 - length; i++) {
-			matrikelnummer += i;
+			matrikelnummer += r.nextInt(10);
 		}
 		return matrikelnummer + nummer;
 	}

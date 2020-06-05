@@ -13,7 +13,8 @@ import dhbw.Termin04.Aufgabe02.Student;
  * und bei Entfernen eines Elements werden die entstandenen Lücken sofort wieder geschlossen. 
  *
  */
-public class StudentenListe {
+public class StudentenListe
+{
 
 	//maximale anzahn von Studenten in der Liste;
 	private final static int MAX_ANZAHL_STUDENTEN = 10;
@@ -32,8 +33,8 @@ public class StudentenListe {
 	
 	/**
 	 * Füge einen neuen Studenten der Liste hinzu.
-	 * @pre. Anzahl kleiner als MAX_ANZAHL_STUDENTEN
-	 * @pre. student noch nicht in der Liste enthalten.
+	 * @pre Anzahl kleiner als MAX_ANZAHL_STUDENTEN
+	 * @pre student noch nicht in der Liste enthalten.
 	 * @param student der hinzuzufügende Student.
 	 */
 	public void addStudent(Student student) {
@@ -121,11 +122,39 @@ public class StudentenListe {
 	/**
 	 * Für die Testausgabe.
 	 */
-	public void printListe() {
+	public void printListe()
+	{
 		System.out.println("Die Liste enthält folgende Studenten:");
 		for (int i=0; i < anzahl; i++) {
 			Student student = liste[i];
 			System.out.println(student.toString());
+		}
+	}
+
+	public Student getStudent(int index)
+	{
+		if(index >= 0 && index < this.getAnzahlStudenten()) {
+			return liste[index];
+		}
+		else {
+			return null;
+		}
+	}
+
+	public void sortStudent()
+	{
+		Student temp;
+		for(int i = 1  ; i < liste.length; i++)
+		{
+			for(int j = 0; j < liste.length - i; j++ )
+			{
+				if((liste[j].compareTo(liste[j + 1])) > 0 )
+				{
+					temp = getStudent(j);
+					liste[j] = liste[j + 1];
+					liste[j+1] = temp;
+				}
+			}
 		}
 	}
 }
