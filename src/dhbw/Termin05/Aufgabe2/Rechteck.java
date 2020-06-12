@@ -1,4 +1,4 @@
-package aufgabe2;
+package dhbw.Termin05.Aufgabe2;
 import java.util.Arrays;
 
 
@@ -14,13 +14,22 @@ public class Rechteck implements Comparable<Rechteck> {
 	 * Konstruktor mit Feldern.
 	 * @param a Seitenlänge a.
 	 * @param b Seitenlänge b.
-	 * @pre. die Seitenlängen a und b müssen positiv sein.
+	 * @pre die Seitenlängen a und b müssen positiv sein.
 	 */
-	public Rechteck(double a, double b) {
+	public Rechteck(double a, double b) throws NegativerWertAusnahme
+	{
 		super();
-		this.a = a;
-		this.b = b;
+		if (a < 0 || b < 0  )
+		{
+			throw new NegativerWertAusnahme();
+		}
+		else
+		{
+			this.a = a;
+			this.b = b;
+		}
 	}
+
 
 	public double getA() {
 		return a;
@@ -108,18 +117,27 @@ public class Rechteck implements Comparable<Rechteck> {
 		return str.toString();
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		//Beispiel Sortierung intrinischer Methode von Rechtecken nach compareTo
-		Rechteck[] eckArray = { new Rechteck(2,2), new Rechteck(3,5), new Rechteck(3,3), new Rechteck(1,1)};
-		System.out.println("unsortierte Reihenfolge");
-		System.out.println(printArray(eckArray));
-		
-		System.out.println("sortiert nach comparable");
-		Arrays.sort(eckArray);
-		System.out.println(printArray(eckArray));
-		
-		System.out.println("sortiert nach Comparator");
-		Arrays.sort(eckArray, new RechteckFlaecheComparator());
-		System.out.println(printArray(eckArray));
+		//TODO Try Cath block
+		try
+		{
+			Rechteck[] eckArray = {new Rechteck(2, 2), new Rechteck(3, 5), new Rechteck(3, 3), new Rechteck(1, 1)};
+			System.out.println("unsortierte Reihenfolge");
+			System.out.println(printArray(eckArray));
+
+			System.out.println("sortiert nach comparable");
+			Arrays.sort(eckArray);
+			System.out.println(printArray(eckArray));
+
+			System.out.println("sortiert nach Comparator");
+			Arrays.sort(eckArray, new RechteckFlaecheComparator());
+			System.out.println(printArray(eckArray));
+		}
+		catch (NegativerWertAusnahme e)
+		{
+			System.out.println("Fehler : Negativer Wert ! ");
+		}
 	}
 }

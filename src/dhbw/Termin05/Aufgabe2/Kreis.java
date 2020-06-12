@@ -1,11 +1,22 @@
-package aufgabe2;
+package dhbw.Termin05.Aufgabe2;
 
+/**
+ * The type Kreis.
+ */
 public class Kreis {
 
 	//radius des Kreises.
 	private double radius;
 
-	public Kreis(double radius) {
+	/**
+	 * konstruktor Kreis
+	 * @param radius vom Kreis
+	 * @pre radius positiver Wert
+	 * @throws NegativerWertAusnahme
+	 */
+	public Kreis(double radius) throws NegativerWertAusnahme
+	{
+		if(radius < 0) throw new NegativerWertAusnahme();
 		this.radius = radius;
 	}
 	

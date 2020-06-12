@@ -1,4 +1,6 @@
-package aufgabe2;
+package dhbw.Termin05.Aufgabe2;
+
+import javax.script.ScriptEngineFactory;
 
 public class Quadrat {
 
@@ -9,8 +11,10 @@ public class Quadrat {
 	 * Konstruktor zur Erzeugung eines Quadrats.
 	 * @param kantenLaenge charakterische Kantenlänge eines Quadrats
 	 */
-	public Quadrat(int kantenLaenge) {
+	public Quadrat(int kantenLaenge) throws NegativerWertAusnahme
+	{
 		super();
+		if (kantenLaenge < 0 ) throw new NegativerWertAusnahme();
 		this.kantenLaenge = kantenLaenge;
 	}
 
@@ -37,7 +41,7 @@ public class Quadrat {
 	
 	@Override
 	public String toString() {
-		return "Quadrat mit der Kantenl�nge = " + getKantenLaenge();
+		return "Quadrat mit der Kantenlänge = " + getKantenLaenge();
 	}
 	
 	@Override
@@ -76,32 +80,46 @@ public class Quadrat {
 		return 5 * hashCode + 13 * hashCode;
 	}
 		
-	public static void main(String[] args) {
-		Quadrat q1 = new Quadrat(2);
-		//System.out.println("Kantenlänge des Quadrats: " + q1.getKantenLaenge() + ", Flächenhinhalt A = " + q1.berechneFlaeche() + ", Umfang U = " + q1.berechneUmfang());
-		Quadrat q2 = new Quadrat(2);
-		//System.out.println("Kantenlänge des Quadrats: " + q2.getKantenLaenge() + ", Flächenhinhalt A = " + q2.berechneFlaeche() + ", Umfang U = " + q2.berechneUmfang());
-		Quadrat q3 = new Quadrat(5);
-		//System.out.println("Kantenlänge des Quadrats: " + q3.getKantenLaenge() + ", Flächenhinhalt A = " + q3.berechneFlaeche() + ", Umfang U = " + q3.berechneUmfang());
-		
-		//Verwendung to toString
-		System.out.println(" q1: " + q1.toString());
-		System.out.println(" q2: " + q2.toString());
-		System.out.println(" q3: " + q3.toString());
-		
-		//Test auf Gleichheit:
-		if (q1 == q2) {
-			System.out.println(" q1 == q2 ");
-		} else {
-			System.out.println(" q1 != q2 ");
-		}
-		System.out.println(" q1.equals(q2) : " + q1.equals(q2));
+	public static void main(String[] args)
+	{
+		try
+		{
+			Quadrat q1 = new Quadrat(2);
+			//System.out.println("Kantenlänge des Quadrats: " + q1.getKantenLaenge() + ", Flächenhinhalt A = " + q1.berechneFlaeche() + ", Umfang U = " + q1.berechneUmfang());
+			Quadrat q2 = new Quadrat(2);
+			//System.out.println("Kantenlänge des Quadrats: " + q2.getKantenLaenge() + ", Flächenhinhalt A = " + q2.berechneFlaeche() + ", Umfang U = " + q2.berechneUmfang());
+			Quadrat q3 = new Quadrat(5);
+			//System.out.println("Kantenlänge des Quadrats: " + q3.getKantenLaenge() + ", Flächenhinhalt A = " + q3.berechneFlaeche() + ", Umfang U = " + q3.berechneUmfang());
 
-		if (q1 == q3) {
-			System.out.println(" q1 == q3 ");
-		} else {
-			System.out.println(" q1 != q3 ");
+			//Verwendung to toString
+			System.out.println(" q1: " + q1.toString());
+			System.out.println(" q2: " + q2.toString());
+			System.out.println(" q3: " + q3.toString());
+
+			//Test auf Gleichheit:
+			if (q1 == q2)
+			{
+				System.out.println(" q1 == q2 ");
+			}
+			else
+			{
+				System.out.println(" q1 != q2 ");
+			}
+			System.out.println(" q1.equals(q2) : " + q1.equals(q2));
+
+			if (q1 == q3)
+			{
+				System.out.println(" q1 == q3 ");
+			}
+			else
+			{
+				System.out.println(" q1 != q3 ");
+			}
+			System.out.println(" q1.equals(q3) : " + q1.equals(q3));
 		}
-		System.out.println(" q1.equals(q3) : " + q1.equals(q3));
-}
+		catch (NegativerWertAusnahme e)
+		{
+			System.out.println("Negativer Wert");
+		}
+ 	}
 }
