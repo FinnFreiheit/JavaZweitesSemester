@@ -1,6 +1,7 @@
-package dhbw.Termin04.Aufgabe02;
+package dhbw.Termin05.Aufgabe2.StudentenJ;
 
-import dhbw.Termin04.Aufgabe02.Student;
+import dhbw.Termin05.Aufgabe2.DoppelungAusnahme;
+import dhbw.Termin05.Aufgabe2.MaxStudentenAusnahme;
 
 import java.util.Random;
 
@@ -26,19 +27,46 @@ public class StudentenListeTest {
 			System.out.println("Eine neue instanziierte Liste darf noch keine Elemente enthalten");
 		}
 		//füge einen Studenten der Liste hinzu
-		liste.addStudent(generateDummyStudent(0));
+		try
+		{
+			liste.addStudent(generateDummyStudent(0));
+		} catch (MaxStudentenAusnahme maxStudentenAusnahme)
+		{
+			maxStudentenAusnahme.printStackTrace();
+		} catch (DoppelungAusnahme doppelungAusnahme)
+		{
+			doppelungAusnahme.printStackTrace();
+		}
 		if (liste.getAnzahlStudenten() != 1) {
 			System.out.println("Der Student wurde nicht hinzugefügt.");
 		}
 		//füge denselben Studenten nochmal hinzu
-		liste.addStudent(generateDummyStudent(0));
+		try
+		{
+			liste.addStudent(generateDummyStudent(0));
+		} catch (MaxStudentenAusnahme maxStudentenAusnahme)
+		{
+			maxStudentenAusnahme.printStackTrace();
+		} catch (DoppelungAusnahme doppelungAusnahme)
+		{
+			doppelungAusnahme.printStackTrace();
+		}
 		if (liste.getAnzahlStudenten() == 2) {
 			System.out.println("Derselbe Student wurde zweimal hinzugefügt!");
 		}
 		
 		//Wähle eine Anzahl größer als MAX_ANZAHL_STUDENT (10)
 		for (int i = 1; i < 20; i++) {
-			liste.addStudent(generateDummyStudent(i));
+			try
+			{
+				liste.addStudent(generateDummyStudent(i));
+			} catch (MaxStudentenAusnahme maxStudentenAusnahme)
+			{
+				maxStudentenAusnahme.printStackTrace();
+			} catch (DoppelungAusnahme doppelungAusnahme)
+			{
+				doppelungAusnahme.printStackTrace();
+			}
 		}
 		//Prüfe, dass die Anzahl nicht größer als MAX_ANZAHL_STUDENT (10) ist.
 		if (liste.getAnzahlStudenten() > 10) {
@@ -115,12 +143,10 @@ public class StudentenListeTest {
 	 * @return 9-stellige Matrikelnummer.
 	 */
 	private static String formatMatrikelNummer(int nummer) {
-
-		Random r = new Random();
 		String matrikelnummer = "";
 		int length = String.valueOf(nummer).length();
 		for (int i = 0; i < 9 - length; i++) {
-			matrikelnummer += r.nextInt(10);
+			matrikelnummer += i;
 		}
 		return matrikelnummer + nummer;
 	}

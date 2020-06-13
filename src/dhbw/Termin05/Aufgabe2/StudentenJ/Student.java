@@ -1,4 +1,6 @@
-package dhbw.Termin04.Aufgabe02;
+package dhbw.Termin05.Aufgabe2.StudentenJ;
+import dhbw.Termin05.Aufgabe2.ImmatrikulationAusnahme;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -54,24 +56,24 @@ public class Student implements Comparable<Student>
 	/**
 	 * Student wird exmatrikuliert.
 	 * @pre Student muss immatrikuliert sein (Datum muss vor heutigem Datum liegen und er darf noch nicht exmatrikuliert sein)
-	 * @post Student ist exmatrikuliert (Datum liegt vor und liegt nach dem Immatrikulationsdatum)
 	 * 
 	 */
-	public void exmatrikulieren() {
+	public void exmatrikulieren() throws ImmatrikulationAusnahme
+	{
 		//Student muss immatrikuliert sein!
-		if (immatrikulationsDatum == null) {
-			System.out.println("Der Student ist noch nicht immatrikuliert");
-			return;
+		if (immatrikulationsDatum == null)
+		{
+			throw new ImmatrikulationAusnahme("Der Student ist noch nicht immatrikuliert");
 		}
 		//Student muss noch immatrikuliert sein
 		if (exmatrikulationsDatum != null) {
-			System.out.println("Der Student ist bereits exmatrikuliert.");
+			throw new ImmatrikulationAusnahme("Der Student ist bereits exmatrikuliert.");
 		}
 		//Immatrikulationsdatum muss vor dem Exmatrikulationsdatum liegen
 		Date now = new Date();
-		if (now.before(immatrikulationsDatum)) {
-			System.out.println("Der Student ist noch nicht immatrikuliert und kann daher nicht exmatrikuliert werden.");
-			return;
+		if (now.before(immatrikulationsDatum))
+		{
+			throw new ImmatrikulationAusnahme("Der Student ist noch nicht immatrikuliert und kann daher nicht exmatrikuliert werden.");
 		} 
 		exmatrikulationsDatum = now;
 	}

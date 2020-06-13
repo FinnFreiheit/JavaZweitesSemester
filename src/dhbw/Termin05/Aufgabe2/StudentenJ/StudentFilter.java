@@ -1,6 +1,4 @@
-package dhbw.Termin04.Aufgabe02;
-
-import dhbw.Termin04.Aufgabe02.Student;
+package dhbw.Termin05.Aufgabe2.StudentenJ;
 
 /**
  * Diese Klasse repräsentiert einen Filter für die Suche nach Studenten.

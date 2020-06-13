@@ -1,4 +1,6 @@
-package dhbw.Termin05.Aufgabe2;
+package dhbw.Termin05.Aufgabe2.Formen;
+import dhbw.Termin05.Aufgabe2.NegativerWertAusnahme;
+
 import java.util.Arrays;
 
 
@@ -119,25 +121,29 @@ public class Rechteck implements Comparable<Rechteck> {
 	
 	public static void main(String[] args)
 	{
+
 		//Beispiel Sortierung intrinischer Methode von Rechtecken nach compareTo
-		//TODO Try Cath block
+
+		Rechteck[] eckArray = new Rechteck[0];
 		try
 		{
-			Rechteck[] eckArray = {new Rechteck(2, 2), new Rechteck(3, 5), new Rechteck(3, 3), new Rechteck(1, 1)};
-			System.out.println("unsortierte Reihenfolge");
-			System.out.println(printArray(eckArray));
-
-			System.out.println("sortiert nach comparable");
-			Arrays.sort(eckArray);
-			System.out.println(printArray(eckArray));
-
-			System.out.println("sortiert nach Comparator");
-			Arrays.sort(eckArray, new RechteckFlaecheComparator());
-			System.out.println(printArray(eckArray));
-		}
-		catch (NegativerWertAusnahme e)
+			eckArray = new Rechteck[]{new Rechteck(-2, 2), new Rechteck(3, 5), new Rechteck(3, 3), new Rechteck(1, 1)};
+		} catch (NegativerWertAusnahme negativerWertAusnahme)
 		{
-			System.out.println("Fehler : Negativer Wert ! ");
+			negativerWertAusnahme.printStackTrace();
+			System.exit(-1);
 		}
+
+		System.out.println("unsortierte Reihenfolge");
+		System.out.println(printArray(eckArray));
+
+		System.out.println("sortiert nach comparable");
+		Arrays.sort(eckArray);
+		System.out.println(printArray(eckArray));
+
+		System.out.println("sortiert nach Comparator");
+		Arrays.sort(eckArray, new RechteckFlaecheComparator());
+		System.out.println(printArray(eckArray));
+
 	}
 }

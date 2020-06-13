@@ -1,4 +1,6 @@
-package dhbw.Termin05.Aufgabe2;
+package dhbw.Termin05.Aufgabe2.Formen;
+
+import dhbw.Termin05.Aufgabe2.NegativerWertAusnahme;
 
 /**
  * The type Kreis.
@@ -28,7 +30,8 @@ public class Kreis {
 		return radius;
 	}
 	
-	public double berechneUmfang() {
+	public double berechneUmfang()
+	{
 		return 2 * radius * Math.PI;
 	}
 	

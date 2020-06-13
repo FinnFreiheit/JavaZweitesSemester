@@ -1,4 +1,4 @@
-package dhbw.Termin05.Aufgabe2;
+package dhbw.Termin05.Aufgabe2.Formen;
 import java.util.Comparator;
 
 

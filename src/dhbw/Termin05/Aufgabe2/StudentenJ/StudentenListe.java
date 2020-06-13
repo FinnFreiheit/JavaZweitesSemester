@@ -1,15 +1,16 @@
-package dhbw.Termin04.Aufgabe02;
+package dhbw.Termin05.Aufgabe2.StudentenJ;
+
+import dhbw.Termin05.Aufgabe2.DoppelungAusnahme;
+import dhbw.Termin05.Aufgabe2.MaxStudentenAusnahme;
 
 import java.util.Arrays;
-
-import dhbw.Termin04.Aufgabe02.Student;
 
 /**
  * Liste für Studenten, der nur bis zu einer vorgedefinierten Anzahl Studenten hinzugefügt werden dürfen.
  * In der Liste darf ein Student nur einmal vorkommen.
  * Studenten sind durch ihre Matrikelnummer eindeutig identifizerbar.
- * @inv. Die Liste darf nie mehr als MAX_ANZAHL_STUDENTEN Elemente haben.
- * @inv. Die Liste darf keine Lücken enthalten, d.h. die Elemente werden immer ans Ende angehängt 
+ * @inv Die Liste darf nie mehr als MAX_ANZAHL_STUDENTEN Elemente haben.
+ * @inv Die Liste darf keine Lücken enthalten, d.h. die Elemente werden immer ans Ende angehängt
  * und bei Entfernen eines Elements werden die entstandenen Lücken sofort wieder geschlossen. 
  *
  */
@@ -37,11 +38,19 @@ public class StudentenListe
 	 * @pre student noch nicht in der Liste enthalten.
 	 * @param student der hinzuzufügende Student.
 	 */
-	public void addStudent(Student student) {
-		if (anzahl < MAX_ANZAHL_STUDENTEN && !containsStudent(student.getMatrikelNummer())) {
-			liste[anzahl] = student;
-			anzahl++;
+	public void addStudent(Student student) throws MaxStudentenAusnahme, DoppelungAusnahme
+	{
+		if(anzahl >= MAX_ANZAHL_STUDENTEN)
+		{
+			throw new MaxStudentenAusnahme();
 		}
+		if(containsStudent(student.getMatrikelNummer()))
+		{
+			throw new DoppelungAusnahme();
+		}
+
+		liste[anzahl] = student;
+		anzahl++;
 	}
 	
 	/**

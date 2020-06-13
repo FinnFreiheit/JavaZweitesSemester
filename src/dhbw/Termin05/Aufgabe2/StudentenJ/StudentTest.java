@@ -1,4 +1,6 @@
-package dhbw.Termin04.Aufgabe02;
+package dhbw.Termin05.Aufgabe2.StudentenJ;
+
+import dhbw.Termin05.Aufgabe2.ImmatrikulationAusnahme;
 
 import java.util.Date;
 
@@ -26,13 +28,25 @@ public class StudentTest {
 				System.out.println("Ein neu erzeugter Student darf noch kein Exmatrikulationsdatum haben!");
 				result = false;
 			}
-			student.exmatrikulieren();
+			try
+			{
+				student.exmatrikulieren();
+			} catch (ImmatrikulationAusnahme immatrikulationAusnahme)
+			{
+				immatrikulationAusnahme.printStackTrace();
+			}
 			if (exmatrikulationsDatum != null) {
 				System.out.println("Ein exmatrikulierter Student muss ein Exmatrikulationsdatum haben!");
 				result = false;
 			}			
 			//zweimal exmatrikulieren
-			student.exmatrikulieren();
+			try
+			{
+				student.exmatrikulieren();
+			} catch (ImmatrikulationAusnahme immatrikulationAusnahme)
+			{
+				immatrikulationAusnahme.printStackTrace();
+			}
 			//--> Bitte die Konsolenausgaben prüfen: Hier muss eine Fehlermeldung kommen aus der Methoden-Implementierung
 			//Abschluss-Prüfung
 			if (result) {
