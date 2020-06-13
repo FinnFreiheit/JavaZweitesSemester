@@ -1,5 +1,8 @@
 package dhbw.Termin05.Aufgabe2;
 
+/**
+ * Diese fachliche Ausnahme wird geworfen, wenn es ein problem mit der Immatrikulationsnummer auftritt.
+ */
 public class ImmatrikulationAusnahme extends Exception
 {
     /**

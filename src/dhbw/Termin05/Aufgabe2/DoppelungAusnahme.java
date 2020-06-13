@@ -1,5 +1,9 @@
 package dhbw.Termin05.Aufgabe2;
 
+/**
+ * Diese fachliche Ausnahme wird geworfen, wenn der aufrufer unerlaubterweise,
+ * ein bereits existierendes Objekt einer Liste hinzufügen möchte.
+ */
 public class DoppelungAusnahme extends Exception
 {
     /**

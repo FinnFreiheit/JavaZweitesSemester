@@ -10,6 +10,9 @@ public class Quadrat {
 	/**
 	 * Konstruktor zur Erzeugung eines Quadrats.
 	 * @param kantenLaenge charakterische Kantenlänge eines Quadrats
+	 * @throws NegativerWertAusnahme die KantenLaenge eines Quadrats darf nicht Negativ sein
+	 * Checked Exception damit kein NULL Objekt erzeugt wird. Und der Anwender die Fehlermeldung verarbeitet.
+	 * Durch die Fehlerbehandlung im Konstruktor können weitere Fehler in den Methoden ausgeschlossen werden.
 	 */
 	public Quadrat(int kantenLaenge) throws NegativerWertAusnahme
 	{

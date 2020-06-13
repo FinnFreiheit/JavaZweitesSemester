@@ -17,6 +17,9 @@ public class Rechteck implements Comparable<Rechteck> {
 	 * @param a Seitenlänge a.
 	 * @param b Seitenlänge b.
 	 * @pre die Seitenlängen a und b müssen positiv sein.
+	 * @throws NegativerWertAusnahme Die Seiten von einem Rechteck dürfen nicht negativ sein.
+	 * Checked Exception damit kein NULL Objekt erzeugt wird. Und der Anwender die Fehlermeldung verarbeitet.
+	 * Durch die Fehlerbahandlung im Konstruktor können weitere Fehler in den Methoden ausgeschlossen werden.
 	 */
 	public Rechteck(double a, double b) throws NegativerWertAusnahme
 	{

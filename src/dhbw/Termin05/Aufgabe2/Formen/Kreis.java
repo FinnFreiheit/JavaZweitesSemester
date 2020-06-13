@@ -14,7 +14,9 @@ public class Kreis {
 	 * konstruktor Kreis
 	 * @param radius vom Kreis
 	 * @pre radius positiver Wert
-	 * @throws NegativerWertAusnahme
+	 * @throws NegativerWertAusnahme Der Radius eines Kreises darf nicht Negativ sein
+	 * Checked Exception damit kein NULL Objekt erzeugt wird. Und der Anwender die Fehlermeldung verarbeitet.
+	 * Durch die Fehlerbahandlung im Konstruktor können weitere Fehler in den Methoden ausgeschlossen werden.
 	 */
 	public Kreis(double radius) throws NegativerWertAusnahme
 	{

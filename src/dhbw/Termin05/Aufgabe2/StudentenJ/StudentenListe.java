@@ -37,6 +37,10 @@ public class StudentenListe
 	 * @pre Anzahl kleiner als MAX_ANZAHL_STUDENTEN
 	 * @pre student noch nicht in der Liste enthalten.
 	 * @param student der hinzuzufügende Student.
+	 * @throws MaxStudentenAusnahme wenn Anzahl größer MAX_ANZAHL_STUDENTEN
+	 * @throws DoppelungAusnahme wenn Student in der Liste bereits enthalten ist.
+	 * Checked Exceptions um den Anwender zu einer Behandlung der Fehlermeldung zu zwingen und ihm bewusst zu machen,
+	 * das der Student nicht hinzugefügt wird, wenn die Liste voll ist oder der Student bereits vorhanden ist.
 	 */
 	public void addStudent(Student student) throws MaxStudentenAusnahme, DoppelungAusnahme
 	{

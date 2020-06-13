@@ -1,5 +1,8 @@
 package dhbw.Termin05.Aufgabe2;
 
+/**
+ * Diese fachliche Ausnahme wird geworfen, wenn der aufrufer die maximale Anzahl an Studenten überschreitet.
+ */
 public class MaxStudentenAusnahme extends Exception
 {
     /**

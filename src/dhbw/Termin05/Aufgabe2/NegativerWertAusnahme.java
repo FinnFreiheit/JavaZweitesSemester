@@ -1,5 +1,8 @@
 package dhbw.Termin05.Aufgabe2;
 
+/**
+ * Diese fachliche Ausnahme wird geworfen, wenn der aufrufer unerlaubterweise, eine Negativen wert ubergeben hat.
+ */
 public class NegativerWertAusnahme extends Exception
 {
     /**

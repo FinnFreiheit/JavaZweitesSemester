@@ -7,6 +7,7 @@ import java.util.Random;
 
 /**
  * Diese Klasse testet die Klasse <code>StudentenListe</code>.
+ * getestet wird ob die Exceptions korrekt implementiert wurden.
  */
 public class StudentenListeTest {
 

@@ -56,7 +56,10 @@ public class Student implements Comparable<Student>
 	/**
 	 * Student wird exmatrikuliert.
 	 * @pre Student muss immatrikuliert sein (Datum muss vor heutigem Datum liegen und er darf noch nicht exmatrikuliert sein)
-	 * 
+	 * @throws ImmatrikulationAusnahme wenn die Vorbedingungen nicht erfüllt sind
+	 * Checked Exception um den Anwender darauf hinzuweisen, das die Vorbedingungen einzuhalten sind und
+	 * bei einem verstoß der Studend nicht exmatrikuliert werden kann. Der Anwender wird auf die jeweiligen Fehler
+	 * hingewisen. Und muss die Exceptions verarbeiten.
 	 */
 	public void exmatrikulieren() throws ImmatrikulationAusnahme
 	{
