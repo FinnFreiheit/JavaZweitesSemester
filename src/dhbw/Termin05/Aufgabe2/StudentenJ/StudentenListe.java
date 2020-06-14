@@ -165,9 +165,11 @@ public class StudentenListe
 	public void sortStudent()
 	{
 		Student temp;
-		for(int i = 1  ; i < liste.length; i++)
+		//for(int i = 1  ; i < liste.length; i++)
+		for(int i = 1  ; i < this.anzahl; i++)
 		{
-			for(int j = 0; j < liste.length - i; j++ )
+			//for(int j = 0; j < liste.length - i; j++ )
+			for(int j = 0; j < this.anzahl - i; j++ )
 			{
 				if((liste[j].compareTo(liste[j + 1])) > 0 )
 				{
@@ -185,9 +187,9 @@ public class StudentenListe
 	public void sortStudentVorname()
 	{
 		Student temp;
-		for(int i = 1  ; i < liste.length; i++)
+		for(int i = 1  ; i < this.anzahl; i++)
 		{
-			for(int j = 0; j < liste.length - i; j++ )
+			for(int j = 0; j < this.anzahl - i; j++ )
 			{
 				if((liste[j].getVorname().compareTo(liste[j + 1].getVorname())) > 0 )
 				{
@@ -205,9 +207,9 @@ public class StudentenListe
 	public void sortStudentNachname()
 	{
 		Student temp;
-		for(int i = 1  ; i < liste.length; i++)
+		for(int i = 1  ; i < this.anzahl; i++)
 		{
-			for(int j = 0; j < liste.length - i; j++ )
+			for(int j = 0; j < this.anzahl - i; j++ )
 			{
 				if((liste[j].getNachname().compareTo(liste[j + 1].getNachname())) > 0 )
 				{
@@ -225,9 +227,9 @@ public class StudentenListe
 	public void sortStudentOrt()
 	{
 		Student temp;
-		for(int i = 1  ; i < liste.length; i++)
+		for(int i = 1  ; i < this.anzahl; i++)
 		{
-			for(int j = 0; j < liste.length - i; j++ )
+			for(int j = 0; j < this.anzahl - i; j++ )
 			{
 				if((liste[j].getOrt().compareTo(liste[j + 1].getOrt())) > 0 )
 				{
