@@ -1,9 +1,10 @@
-package dhbw.Termin05.Aufgabe2.StudentenJ;
-
-import dhbw.Termin05.Aufgabe2.DoppelungAusnahme;
-import dhbw.Termin05.Aufgabe2.MaxStudentenAusnahme;
+package dhbw.Termin06.Aufgabe3.student;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Random;
+import java.util.function.Supplier;
+
 
 /**
  * Liste für Studenten, der nur bis zu einer vorgedefinierten Anzahl Studenten hinzugefügt werden dürfen.
@@ -14,8 +15,7 @@ import java.util.Arrays;
  * und bei Entfernen eines Elements werden die entstandenen Lücken sofort wieder geschlossen. 
  *
  */
-public class StudentenListe
-{
+public class StudentListe {
 
 	//maximale anzahn von Studenten in der Liste;
 	private final static int MAX_ANZAHL_STUDENTEN = 10;
@@ -26,7 +26,7 @@ public class StudentenListe
 	// zählt die Anzahl der immatrikulierten Studenten
 	private int anzahl;
 
-	public StudentenListe() {
+	public StudentListe() {
 		super();
 		liste = new Student[MAX_ANZAHL_STUDENTEN];
 		anzahl = 0;
@@ -34,27 +34,25 @@ public class StudentenListe
 	
 	/**
 	 * Füge einen neuen Studenten der Liste hinzu.
-	 * @pre Anzahl kleiner als MAX_ANZAHL_STUDENTEN
-	 * @pre student noch nicht in der Liste enthalten.
+	 * @pre. Anzahl kleiner als MAX_ANZAHL_STUDENTEN
+	 * @pre. student noch nicht in der Liste enthalten.
 	 * @param student der hinzuzufügende Student.
-	 * @throws MaxStudentenAusnahme wenn Anzahl größer MAX_ANZAHL_STUDENTEN
-	 * @throws DoppelungAusnahme wenn Student in der Liste bereits enthalten ist.
-	 * Checked Exceptions um den Anwender zu einer Behandlung der Fehlermeldung zu zwingen und ihm bewusst zu machen,
-	 * das der Student nicht hinzugefügt wird, wenn die Liste voll ist oder der Student bereits vorhanden ist.
 	 */
-	public void addStudent(Student student) throws MaxStudentenAusnahme, DoppelungAusnahme
-	{
-		if(anzahl >= MAX_ANZAHL_STUDENTEN)
-		{
-			throw new MaxStudentenAusnahme();
+	public void addStudent(Student student) {
+		//Wenn die Liste zu groß wird muss der Anwender der Methode benachrichtigt werden,
+		//da er sonst nicht mitbekommen würde, dass der Student der Liste nicht hinzugefügt wurde.
+		//Es würden also Informationen verloren gehen.
+		//Es muss dann entweder die Anzahl der erlaubten Studenten erhöht werden 
+		//oder im Programm dürfen nicht soviele Studenten hinzugefügt werden 
+		if (anzahl == MAX_ANZAHL_STUDENTEN) {
+			throw new RuntimeException("Liste bereits voll.");
 		}
-		if(containsStudent(student.getMatrikelNummer()))
-		{
-			throw new DoppelungAusnahme();
+		//Hier muss keine Exception fliegen, da das Verhalten leise korrigiert werden kann.
+		//Es gehen keinerlei Informationen verloren.
+		if (!containsStudent(student.getMatrikelNummer())) {
+			liste[anzahl] = student;
+			anzahl++;
 		}
-
-		liste[anzahl] = student;
-		anzahl++;
 	}
 	
 	/**
@@ -135,109 +133,49 @@ public class StudentenListe
 	/**
 	 * Für die Testausgabe.
 	 */
-	public void printListe()
-	{
+	public void printListe() {
 		System.out.println("Die Liste enthält folgende Studenten:");
 		for (int i=0; i < anzahl; i++) {
 			Student student = liste[i];
 			System.out.println(student.toString());
 		}
 	}
-
+	
 	/**
-	 * Gibt den Studenten an der stelle vom übergebenen Index zurück
-	 * @param index Arrayposition
-	 * @return Student
+	 * sortiert die Studentenliste nach dem intrinsischen Kriterium der Fachklasse <code>Student</code>.
+	 * Der Vertrag sieht hier vor, dass die Fachklasse eine intrinsische Sortierung haben muss, d.h. das interface Comparable implementiert.
+	 * @return sortierte List gemäß intrinsischer Sortierung der Fachklasse <code>Student</code>.
 	 */
-	public Student getStudent(int index)
-	{
-		if(index >= 0 && index < this.getAnzahlStudenten()) {
-			return liste[index];
-		}
-		else {
-			return null;
-		}
+	public Student[] sort() {
+		//verwende intrinsisches Sortierkriterium der Fachklasse.
+		//Hinweis: Diese Methode wirft eine Laufzeitfehlermeldung, wenn die Fachklasse nicht das interface comparable implementieren würde!
+		Arrays.sort(liste);
+		return liste;
+	}
+	
+	/**
+	 * Sortiert die Studentenliste nach dem Nachnamen.
+	 * @return sortierte Liste gemäß Nachnamen der Studenten.
+	 */
+	public Student[] sortName() {
+		//übergebe Namens-Sortierer als Strategie
+		return sort(new NameComparator());
+	}
+	
+	public Student[] sortOrt() {
+		//übergebe Orts-Sortierer als Strategie
+		return sort(new OrtComparator());
+	}
+	
+	/**
+	 * sortiert die Studentenliste gemäß dem übergebenen <code>Comparator</code>.
+	 * Unter Verwendung eines Comparators muss die Fachklasse selbst nicht mehr das Interface <code>Comparable</code> implementieren.
+	 * @return sortierte List gemäß übergebenem <code>Comparator</code>.
+	 */
+	private Student[] sort(Comparator<Student> comparator) {
+		Arrays.sort(liste, comparator);
+		return liste;
 	}
 
-	/**
-	 * Sortiert Studentenliste nach der Matrikelnummer aufsteigend.
-	 */
-	public void sortStudent()
-	{
-		Student temp;
-		//for(int i = 1  ; i < liste.length; i++)
-		for(int i = 1  ; i < this.anzahl; i++)
-		{
-			//for(int j = 0; j < liste.length - i; j++ )
-			for(int j = 0; j < this.anzahl - i; j++ )
-			{
-				if((liste[j].compareTo(liste[j + 1])) > 0 )
-				{
-					temp = getStudent(j);
-					liste[j] = liste[j + 1];
-					liste[j+1] = temp;
-				}
-			}
-		}
-	}
 
-	/**
-	 * sortiert Studentenliste nach dem Vornamen
-	 */
-	public void sortStudentVorname()
-	{
-		Student temp;
-		for(int i = 1  ; i < this.anzahl; i++)
-		{
-			for(int j = 0; j < this.anzahl - i; j++ )
-			{
-				if((liste[j].getVorname().compareTo(liste[j + 1].getVorname())) > 0 )
-				{
-					temp = getStudent(j);
-					liste[j] = liste[j + 1];
-					liste[j+1] = temp;
-				}
-			}
-		}
-	}
-
-	/**
-	 * sortiert Studentenliste nach dem Nachnamen
-	 */
-	public void sortStudentNachname()
-	{
-		Student temp;
-		for(int i = 1  ; i < this.anzahl; i++)
-		{
-			for(int j = 0; j < this.anzahl - i; j++ )
-			{
-				if((liste[j].getNachname().compareTo(liste[j + 1].getNachname())) > 0 )
-				{
-					temp = getStudent(j);
-					liste[j] = liste[j + 1];
-					liste[j+1] = temp;
-				}
-			}
-		}
-	}
-
-	/**
-	 * sortiert Studentenliste nach dem Ort
-	 */
-	public void sortStudentOrt()
-	{
-		Student temp;
-		for(int i = 1  ; i < this.anzahl; i++)
-		{
-			for(int j = 0; j < this.anzahl - i; j++ )
-			{
-				if((liste[j].getOrt().compareTo(liste[j + 1].getOrt())) > 0 )
-				{
-					temp = getStudent(j);
-					liste[j] = liste[j + 1];
-					liste[j+1] = temp;
-				}
-			}
-		}
-	}
 }

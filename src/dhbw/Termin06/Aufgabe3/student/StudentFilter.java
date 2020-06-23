@@ -1,4 +1,4 @@
-package dhbw.Termin05.Aufgabe2.StudentenJ;
+package dhbw.Termin06.Aufgabe3.student;
 
 /**
  * Diese Klasse repräsentiert einen Filter für die Suche nach Studenten.
@@ -18,7 +18,8 @@ public class StudentFilter {
 	 * @param vorname der Vorname (optional)
 	 * @param nachname der Nachname (optional)
 	 * @param ort der Wohnort (optional)
-	 * @pre nicht alle Attribute sind leer
+	 * @pre. nicht alle Attribute sind leer
+	 * @post. nicht alle Attribute sind leer
 	 */
 	public StudentFilter(String matrikelNummer, String vorname, String nachname, String ort) {
 		//es erfolgt keine explizite Überprüfung auf die Vorbedingungen
@@ -34,7 +35,7 @@ public class StudentFilter {
 	 * prüft, ob ein <code>Student</code> den Krierien entspricht.
 	 * @param student der gegen den Filter zu prüfende Student.
 	 * @return true, wenn alle Filterkriterien erfüllt sind, sonst false.
-	 * @pre Es darf kein leeres Studenten-Objekt übergeben werden.
+	 * @pre. Es darf kein leeres Studenten-Objekt übergeben werden.
 	 */
 	public boolean matchFilter(Student student) {
 		boolean result = true;
