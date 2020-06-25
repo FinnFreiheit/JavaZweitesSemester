@@ -30,30 +30,33 @@ public class Server
         String gesamt =  in.readLine();
         String[] split = gesamt.split("0");
 
-        createFile(split);
+        createFileAndWrite(split);
+        System.out.println(split.length);
 
-        System.out.println(split[1]);
 
 
     }
 
 
 
-    //todo Funktioniert außer Zeilenumbruch !!
+/*    //todo Funktioniert außer Zeilenumbruch !!
     public void schreibeFile(String file,String text) throws IOException
     {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(file)))
         {
             writer.write(text);
         }
-    }
+    }*/
 
-    public void createFile(String[] strings) throws IOException
+    public void createFileAndWrite(String[] strings) throws IOException
     {
-        //FileOutputStream out = new FileOutputStream(this.verzeichnis + strings[0]);
        try(BufferedWriter writer = new BufferedWriter(new FileWriter(this.verzeichnis + strings[0])))
        {
-           writer.write(strings[1]);
+           for(int i = 1 ; i < strings.length; i++)
+           {
+               writer.write(strings[i]);
+               writer.write("\n");
+           }
        }
 
     }

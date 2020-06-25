@@ -45,11 +45,11 @@ public class Client
     }
 
 
-    public String sendMessage(String msg) throws IOException
+    public void sendMessage(String msg) throws IOException
     {
         out.println(msg);
-        String resp = in.readLine();
-        return resp;
+        //String resp = in.readLine();
+        //return resp;
     }
 
 
@@ -67,6 +67,7 @@ public class Client
             while((zeile = reader.readLine()) != null)
             {
                 inhalt.append(zeile);
+                inhalt.append(0);
             }
         }
         return inhalt.toString();
@@ -102,5 +103,6 @@ public class Client
         client.startConnection();
         //System.out.println(client.sendMessage("hello server"));
         client.sendMessage(client.leseDateiUndSpeicherInhalt());
+        //client.leseDateiUndSpeicherInhalt();
     }
 }
